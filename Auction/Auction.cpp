@@ -3,33 +3,34 @@
 #include <windows.h>
 
 void FixConsoleSize() {
-    // 1. 현재 콘솔 창의 핸들(ID)을 가져옵니다.
-    HWND hwnd = GetConsoleWindow();
+	// 1. 현재 콘솔 창의 핸들(ID)을 가져옵니다.
+	HWND hwnd = GetConsoleWindow();
 
-    // 2. 창의 현재 스타일 정보를 가져옵니다.
-    long style = GetWindowLong(hwnd, GWL_STYLE);
+	// 2. 창의 현재 스타일 정보를 가져옵니다.
+	long style = GetWindowLong(hwnd, GWL_STYLE);
 
-    // 3. 스타일에서 '크기 조절(WS_THICKFRAME)'과 '최대화 버튼(WS_MAXIMIZEBOX)' 기능을 뺍니다.
-    style &= ~WS_THICKFRAME;
-    style &= ~WS_MAXIMIZEBOX;
+	// 3. 스타일에서 '크기 조절(WS_THICKFRAME)'과 '최대화 버튼(WS_MAXIMIZEBOX)' 기능을 뺍니다.
+	style &= ~WS_THICKFRAME;
+	style &= ~WS_MAXIMIZEBOX;
 
-    // 4. 수정한 스타일을 창에 다시 적용합니다.
-    SetWindowLong(hwnd, GWL_STYLE, style);
+	// 4. 수정한 스타일을 창에 다시 적용합니다.
+	SetWindowLong(hwnd, GWL_STYLE, style);
 
-    // 5. 변경사항을 즉시 반영하여 창을 갱신합니다.
-    SetWindowPos(hwnd, NULL, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE | SWP_NOZORDER | SWP_FRAMECHANGED);
+	// 5. 변경사항을 즉시 반영하여 창을 갱신합니다.
+	SetWindowPos(hwnd, NULL, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE | SWP_NOZORDER | SWP_FRAMECHANGED);
 }
 
 int main()
 {
-    //콘솔 설정
-    SetConsoleTitle(L"레전드 경매 게임");
-    system("mode con:cols=122 lines=55");
-    FixConsoleSize();
-    
-    AuctionSystem* Auction = new AuctionSystem();
+	//콘솔 설정
+	SetConsoleTitle(L"레전드 경매 게임");
+	system("mode con:cols=122 lines=55");
+	FixConsoleSize();
+	
+	AuctionSystem* Auction = new AuctionSystem();
 
-    DrawAuctionScreen(Auction);
+	//DrawAuctionScreen(Auction);
+	DrawMainMenu();
 }
 
 //게임 흐름

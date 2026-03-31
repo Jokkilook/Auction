@@ -19,15 +19,9 @@ public:
 
 	Item* AuctionItem;
 
-	//°æ¸Å ½ÃÀÛ ÇÔ¼ö
+	//ê²½ë§¤ ì‹œìž‘ í•¨ìˆ˜
 	void StartAuction();
 
-	//°æ¸Å Á¾·á ÇÔ¼ö
+	//ê²½ë§¤ ì¢…ë£Œ í•¨ìˆ˜
 	void EndAuction();
-
-	//NPC ¼ÒÈ¯ ÇÔ¼ö
-	
-
-	//°æ¸Å ·çÇÁ
-
 };

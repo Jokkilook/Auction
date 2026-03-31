@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include "Item.h"
 
 using namespace std;
 
@@ -11,6 +12,6 @@ class Player
 
 	vector<Item*> Inventory;
 
-	//¾ÆÀÌÅÛ ³Ö´Â ÇÔ¼ö
+	//ì¸ë²¤í† ë¦¬ì— ì•„ì´í…œ ë„£ëŠ” í•¨ìˆ˜
 	bool PutItemToInventory(Item* NewItem);
 };
