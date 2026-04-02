@@ -3,56 +3,56 @@
   "WorkspaceRootPath": "E:\\GitHub\\Auction\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|E:\\GitHub\\Auction\\Auction\\Auction.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|solutionrelative:Auction\\Auction.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|E:\\GitHub\\Auction\\Auction\\Drawer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|solutionrelative:Auction\\Drawer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|E:\\GitHub\\Auction\\Auction\\AuctionSystem.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|solutionrelative:Auction\\AuctionSystem.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|E:\\GitHub\\Auction\\Auction\\Participant.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|solutionrelative:Auction\\Participant.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|E:\\GitHub\\Auction\\Auction\\Drawer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|solutionrelative:Auction\\Drawer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|E:\\GitHub\\Auction\\Auction\\Participant.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|solutionrelative:Auction\\Participant.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|E:\\GitHub\\Auction\\Auction\\NPC.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|solutionrelative:Auction\\NPC.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|E:\\GitHub\\Auction\\Auction\\NPC.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|solutionrelative:Auction\\NPC.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|E:\\GitHub\\Auction\\Auction\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|solutionrelative:Auction\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|E:\\GitHub\\Auction\\Auction\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|solutionrelative:Auction\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|E:\\GitHub\\Auction\\Auction\\AuctionSystem.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|solutionrelative:Auction\\AuctionSystem.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|E:\\GitHub\\Auction\\Auction\\NPC.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|solutionrelative:Auction\\NPC.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|E:\\GitHub\\Auction\\Auction\\Drawer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|solutionrelative:Auction\\Drawer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|E:\\GitHub\\Auction\\Auction\\Item.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|solutionrelative:Auction\\Item.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|E:\\GitHub\\Auction\\Auction\\Auction.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|solutionrelative:Auction\\Auction.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|E:\\GitHub\\Auction\\Auction\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|solutionrelative:Auction\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|E:\\GitHub\\Auction\\Auction\\NPC.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|solutionrelative:Auction\\NPC.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|E:\\GitHub\\Auction\\Auction\\Participant.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|solutionrelative:Auction\\Participant.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|E:\\GitHub\\Auction\\Auction\\Item.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|solutionrelative:Auction\\Item.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|E:\\GitHub\\Auction\\Auction\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|solutionrelative:Auction\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|E:\\GitHub\\Auction\\Auction\\Item.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|solutionrelative:Auction\\Item.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|E:\\GitHub\\Auction\\Auction\\Participant.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|solutionrelative:Auction\\Participant.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BDF8294D-6582-45E8-AF22-59C37FB45B27}|Auction\\Auction.vcxproj|E:\\GitHub\\Auction\\Auction\\Data.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -66,30 +66,30 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 6,
               "Title": "Item.cpp",
               "DocumentMoniker": "E:\\GitHub\\Auction\\Auction\\Item.cpp",
               "RelativeDocumentMoniker": "Auction\\Item.cpp",
               "ToolTip": "E:\\GitHub\\Auction\\Auction\\Item.cpp",
               "RelativeToolTip": "Auction\\Item.cpp",
-              "ViewState": "AgIAAGYAAAAAAAAAAAAAAFcAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAE0AAAAAAAAAAAAcwF0AAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-03-31T02:50:35.729Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "Drawer.cpp",
               "DocumentMoniker": "E:\\GitHub\\Auction\\Auction\\Drawer.cpp",
               "RelativeDocumentMoniker": "Auction\\Drawer.cpp",
               "ToolTip": "E:\\GitHub\\Auction\\Auction\\Drawer.cpp",
               "RelativeToolTip": "Auction\\Drawer.cpp",
-              "ViewState": "AgIAANQAAAAAAAAAAAAAAOEAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAMoAAAAAAAAAAAAAAO4AAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-03-31T03:23:04.398Z",
               "EditorCaption": ""
@@ -102,59 +102,53 @@
               "RelativeDocumentMoniker": "Auction\\AuctionSystem.cpp",
               "ToolTip": "E:\\GitHub\\Auction\\Auction\\AuctionSystem.cpp",
               "RelativeToolTip": "Auction\\AuctionSystem.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAACUAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-03-31T02:50:33.495Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 2,
               "Title": "Player.cpp",
               "DocumentMoniker": "E:\\GitHub\\Auction\\Auction\\Player.cpp",
               "RelativeDocumentMoniker": "Auction\\Player.cpp",
               "ToolTip": "E:\\GitHub\\Auction\\Auction\\Player.cpp",
               "RelativeToolTip": "Auction\\Player.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAATAAAAAAAAAA==",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAMwCwAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-03-31T02:44:18.72Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "NPC.cpp",
               "DocumentMoniker": "E:\\GitHub\\Auction\\Auction\\NPC.cpp",
               "RelativeDocumentMoniker": "Auction\\NPC.cpp",
               "ToolTip": "E:\\GitHub\\Auction\\Auction\\NPC.cpp",
               "RelativeToolTip": "Auction\\NPC.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACsAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-03-31T03:15:36.712Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 7,
               "Title": "Auction.cpp",
               "DocumentMoniker": "E:\\GitHub\\Auction\\Auction\\Auction.cpp",
               "RelativeDocumentMoniker": "Auction\\Auction.cpp",
               "ToolTip": "E:\\GitHub\\Auction\\Auction\\Auction.cpp",
               "RelativeToolTip": "Auction\\Auction.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAaAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-03-17T02:56:59.76Z",
               "EditorCaption": ""
-            }
-          ]
-        },
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
+            },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 12,
               "Title": "Participant.cpp",
               "DocumentMoniker": "E:\\GitHub\\Auction\\Auction\\Participant.cpp",
               "RelativeDocumentMoniker": "Auction\\Participant.cpp",
@@ -164,42 +158,48 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-04-02T05:35:38.889Z",
               "EditorCaption": ""
-            },
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "NPC.h",
               "DocumentMoniker": "E:\\GitHub\\Auction\\Auction\\NPC.h",
               "RelativeDocumentMoniker": "Auction\\NPC.h",
               "ToolTip": "E:\\GitHub\\Auction\\Auction\\NPC.h",
               "RelativeToolTip": "Auction\\NPC.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2026-03-31T02:54:16.406Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "Player.h",
               "DocumentMoniker": "E:\\GitHub\\Auction\\Auction\\Player.h",
               "RelativeDocumentMoniker": "Auction\\Player.h",
               "ToolTip": "E:\\GitHub\\Auction\\Auction\\Player.h",
               "RelativeToolTip": "Auction\\Player.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2026-03-31T02:44:18.319Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 10,
               "Title": "Participant.h",
               "DocumentMoniker": "E:\\GitHub\\Auction\\Auction\\Participant.h",
               "RelativeDocumentMoniker": "Auction\\Participant.h",
               "ToolTip": "E:\\GitHub\\Auction\\Auction\\Participant.h",
               "RelativeToolTip": "Auction\\Participant.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2026-04-01T03:39:33.702Z",
               "EditorCaption": ""
@@ -219,39 +219,39 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 3,
               "Title": "AuctionSystem.h",
               "DocumentMoniker": "E:\\GitHub\\Auction\\Auction\\AuctionSystem.h",
               "RelativeDocumentMoniker": "Auction\\AuctionSystem.h",
               "ToolTip": "E:\\GitHub\\Auction\\Auction\\AuctionSystem.h",
               "RelativeToolTip": "Auction\\AuctionSystem.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAABJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2026-03-31T02:50:28.741Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "Item.h",
               "DocumentMoniker": "E:\\GitHub\\Auction\\Auction\\Item.h",
               "RelativeDocumentMoniker": "Auction\\Item.h",
               "ToolTip": "E:\\GitHub\\Auction\\Auction\\Item.h",
               "RelativeToolTip": "Auction\\Item.h",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAACMAAAA9AAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABkAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2026-03-31T02:44:44.686Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 5,
               "Title": "Drawer.h",
               "DocumentMoniker": "E:\\GitHub\\Auction\\Auction\\Drawer.h",
               "RelativeDocumentMoniker": "Auction\\Drawer.h",
               "ToolTip": "E:\\GitHub\\Auction\\Auction\\Drawer.h",
               "RelativeToolTip": "Auction\\Drawer.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAXAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2026-03-31T03:22:57.483Z",
               "EditorCaption": ""

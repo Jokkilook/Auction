@@ -1,5 +1,6 @@
 ﻿#include "Player.h"
 #include "Item.h"
+#include "AuctionSystem.h"
 
 Player::Player()
 {
@@ -29,4 +30,18 @@ bool Player::PurchaseItem(Item* NewItem)
 
 	//풀 인벤
 	return false;
+}
+
+bool Player::HandleItem(Item* TargetItem) 
+{
+	AuctionSystem Auction = AuctionSystem::GetInstance();
+	CallValue = TargetItem->CallValue + Auction.Increament;
+
+	if (CallValue > CurrentMoney) 
+	{
+		return false;
+	}
+
+	TargetItem->CallValue = CallValue;
+	return true;
 }

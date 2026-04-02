@@ -18,6 +18,15 @@ void DrawMainMenu();
 //경매 틀 그리기 함수
 void DrawAuctionScreen();
 
+//로그 섹션 클리어 함수
+void ClearLogSection();
+
+//경매가 입력 시퀀스
+void CallValueSequence(Item* NewItem);
+
+//플레이어 선택 시퀀스
+bool PlayerSelectionSequence();
+
 //아이템 데이터 업데이트 함수
 void UpdateItem(Item* NewItem);
 
@@ -26,3 +35,9 @@ void UpdateSlot(Participant* Part, int Index);
 
 //플레이어 지갑 업데이트 함수
 void UpdateWallet(Player* Player);
+
+//플레이어 구매 시퀀스
+void PurchaseSequence();
+
+//플레이어 포기 시퀀스
+void GiveupSequence();

@@ -12,7 +12,7 @@ class AuctionSystem
 
 public:
 
-	int Day = 0;
+	int Day = 1;
 	int Week = 1;
 
 	float Increament = 100000;
@@ -36,6 +36,9 @@ public:
 
 	//참가자들 참가 상태로
 	void JoinParticipants();
+
+	//NPC 포기 상태 확인;
+	bool CheckAllNPCGiveup();
 
 	//새로운 아이템으로 갈아끼우기
 	void SetNewItem();

@@ -1,2 +1,6 @@
-﻿  Auction.cpp
+﻿  Drawer.cpp
+E:\GitHub\Auction\Auction\Drawer.cpp(53,16): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+E:\GitHub\Auction\Auction\Drawer.cpp(343,26): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+E:\GitHub\Auction\Auction\Drawer.cpp(344,41): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+E:\GitHub\Auction\Auction\Drawer.cpp(428,1): warning C4715: 'PlayerSelectionSequence': 모든 제어 경로에서 값을 반환하지는 않습니다.
   Auction.vcxproj -> E:\GitHub\Auction\x64\Debug\Auction.exe
