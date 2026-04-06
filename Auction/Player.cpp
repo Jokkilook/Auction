@@ -5,6 +5,43 @@
 Player::Player()
 {
 	AddMoney(5000000);
+
+	for (int i = 0; i < 20; i++) {
+		//PutItemToInventory(new Item());
+	}
+}
+
+Player::~Player()
+{
+	for (Item* item : Inventory) {
+		delete item;
+	}
+	Inventory.clear();
+}
+
+int Player::GetInventoryCount() const
+{
+	return static_cast<int>(Inventory.size());
+}
+
+Item* Player::GetInventoryItem(int Index) const
+{
+	if (Index < 0 || Index >= static_cast<int>(Inventory.size())) return nullptr;
+	return Inventory[Index];
+}
+
+bool Player::SellInventoryItem(int Index)
+{
+	if (Index < 0 || Index >= static_cast<int>(Inventory.size())) return false;
+
+	Item* item = Inventory[Index];
+	if (item) {
+		AddMoney(item->GetRealValue());
+		delete item;
+	}
+
+	Inventory.erase(Inventory.begin() + Index);
+	return true;
 }
 
 bool Player::PutItemToInventory(Item* NewItem)
@@ -34,7 +71,7 @@ bool Player::PurchaseItem(Item* NewItem)
 
 bool Player::HandleItem(Item* TargetItem) 
 {
-	AuctionSystem Auction = AuctionSystem::GetInstance();
+	auto& Auction = AuctionSystem::GetInstance();
 	CallValue = TargetItem->CallValue + Auction.Increament;
 
 	if (CallValue > CurrentMoney) 

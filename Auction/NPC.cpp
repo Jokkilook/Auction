@@ -29,7 +29,7 @@ void NPC::HandleItem(Item* TargetItem)
 	float randomValue = dis(gen);
 
 	if (randomValue < 0.1f) {
-		AuctionSystem Auction = AuctionSystem::GetInstance();
+		auto& Auction = AuctionSystem::GetInstance();
 		CallValue = TargetItem->CallValue + Auction.Increament * 5.0f;
 		TargetItem->CallValue = CallValue;
 	}
@@ -40,7 +40,7 @@ void NPC::HandleItem(Item* TargetItem)
 		}
 		//아니면 가격 올려 부르기
 		else {
-			AuctionSystem Auction = AuctionSystem::GetInstance();
+			auto& Auction = AuctionSystem::GetInstance();
 			CallValue = TargetItem->CallValue + Auction.Increament;
 			TargetItem->CallValue = CallValue;
 		}

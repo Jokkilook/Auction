@@ -1,5 +1,25 @@
 ﻿#include "AuctionSystem.h"
 
+AuctionSystem::~AuctionSystem()
+{
+	if (AuctionItem) {
+		delete AuctionItem;
+		AuctionItem = nullptr;
+	}
+
+	for (NPC* npc : Npcs) {
+		delete npc;
+	}
+	Npcs.clear();
+
+	Participants.clear();
+
+	if (CurrentPlayer) {
+		delete CurrentPlayer;
+		CurrentPlayer = nullptr;
+	}
+}
+
 AuctionSystem::AuctionSystem()
 {
 	Player* MainPlayer = new Player();
@@ -59,7 +79,10 @@ void AuctionSystem::StartAuction()
 
 void AuctionSystem::EndAuction()
 {
-	AuctionItem = nullptr;
+	if (AuctionItem) {
+		delete AuctionItem;
+		AuctionItem = nullptr;
+	}
 
 	for (NPC* npc : Npcs) {
 		delete npc;
@@ -73,5 +96,8 @@ void AuctionSystem::EndAuction()
 	}
 
 	Day++;
-	if (Day % 7 == 0) Week++;
+	if (Day > 7) {
+		Week++;
+		Day = 1;
+	}
 }

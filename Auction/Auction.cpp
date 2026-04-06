@@ -2,6 +2,23 @@
 #include  "Drawer.h"
 #include <windows.h>
 
+void EnableConsoleUtf8AndVT()
+{
+	// UTF-8 출력(한글/박스 문자 깨짐 방지)
+	SetConsoleOutputCP(CP_UTF8);
+	SetConsoleCP(CP_UTF8);
+
+	// ANSI Escape Sequence(커서 이동/색상) 활성화
+	HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	if (hOut == INVALID_HANDLE_VALUE) return;
+
+	DWORD mode = 0;
+	if (!GetConsoleMode(hOut, &mode)) return;
+
+	mode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
+	SetConsoleMode(hOut, mode);
+}
+
 void FixConsoleSize() {
 	// 1. 현재 콘솔 창의 핸들(ID)을 가져옵니다.
 	HWND hwnd = GetConsoleWindow();
@@ -24,13 +41,11 @@ int main()
 {
 	//콘솔 설정
 	SetConsoleTitle(L"레전드 경매 게임");
+	EnableConsoleUtf8AndVT();
 	system("mode con:cols=120 lines=45");
 	FixConsoleSize();
 	
-	AuctionSystem::GetInstance();
-	//Auction->StartAuction();
-	DrawAuctionScreen();
-	//DrawMainMenu();
+	DrawMainMenu();
 }
 
 //게임 흐름

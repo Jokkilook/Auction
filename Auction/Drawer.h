@@ -15,8 +15,14 @@ void DrawBox(int row, int col, int width, int height);
 //메인 메뉴 그리기 함수
 void DrawMainMenu();
 
-//경매 틀 그리기 함수
+//프롤로그 그리기 함수
+void DrawPrologue();
+
+//경매 그리기 함수
 void DrawAuctionScreen();
+
+//정산날 그리기 함수
+void DrawCalculateDay();
 
 //로그 섹션 클리어 함수
 void ClearLogSection();
@@ -37,7 +43,7 @@ void UpdateSlot(Participant* Part, int Index);
 void UpdateWallet(Player* Player);
 
 //플레이어 구매 시퀀스
-void PurchaseSequence();
+void PurchaseSequence(const Item* PurchasedItem);
 
 //플레이어 포기 시퀀스
 void GiveupSequence();

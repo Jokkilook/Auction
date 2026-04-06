@@ -9,21 +9,26 @@ using namespace std;
 class AuctionSystem
 {
 	AuctionSystem();
+	AuctionSystem(const AuctionSystem&) = delete;
+	AuctionSystem& operator=(const AuctionSystem&) = delete;
+	AuctionSystem(AuctionSystem&&) = delete;
+	AuctionSystem& operator=(AuctionSystem&&) = delete;
 
 public:
+	~AuctionSystem();
 
 	int Day = 1;
 	int Week = 1;
 
 	float Increament = 100000;
 
-	Player* CurrentPlayer;
+	Player* CurrentPlayer = nullptr;
 
 	vector<NPC*> Npcs;
 
 	vector<Participant*> Participants;
 
-	Item* AuctionItem;
+	Item* AuctionItem = nullptr;
 
 	static AuctionSystem& GetInstance() {
 		static AuctionSystem Instance;
