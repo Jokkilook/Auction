@@ -14,6 +14,7 @@
 # Precompiled Headers
 *.gch
 *.pch
+*.ipch
 
 # Compiled Dynamic libraries
 *.so
@@ -147,6 +148,8 @@ ipch/
 *.cachefile
 *.VC.db
 *.VC.VC.opendb
+
+$.vs/
 
 # Visual Studio profiler
 *.psess

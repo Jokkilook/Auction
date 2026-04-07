@@ -11,10 +11,15 @@ class Player : public Participant
 	string Name = "빵빵이";
 	vector<Item*> Inventory;
 
+	float Goal;
+
 public:
 
 	Player();
 	~Player() override;
+
+	//인벤토리 반환
+	vector<Item*> GetInventory() const { return Inventory; };
 
 	//인벤토리 개수 반환
 	int GetInventoryCount() const;
@@ -39,4 +44,10 @@ public:
 
 	//이름 설정 함수
 	void SetName(string NewName) { Name = NewName; };
+	
+	//목표 금액 설정 함수
+	void SetGoal(float NewGoal) { Goal = NewGoal; };
+
+	//목표 금액 반환 함수
+	float GetGoal() const { return Goal; };
 };

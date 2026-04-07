@@ -1,4 +1,5 @@
 ﻿#include "AuctionSystem.h"
+#include <random>
 
 AuctionSystem::~AuctionSystem()
 {
@@ -100,4 +101,54 @@ void AuctionSystem::EndAuction()
 		Week++;
 		Day = 1;
 	}
+}
+
+void AuctionSystem::SetNews()
+{
+	static std::random_device rd;
+	static std::mt19937 gen(rd());
+	std::uniform_int_distribution<int> dis(0, ItemType::NAMED - 1);
+
+	ItemType randomType = static_cast<ItemType>(dis(gen));
+	News = randomType;
+
+	std::uniform_int_distribution<int> diss(0, 1);
+	NewsType = diss(gen);
+}
+
+void AuctionSystem::ApplyNewsToItem(Item* TargetItem)
+{
+	if (News == TargetItem->Type) {
+		
+		if (NewsType) {
+			float EfftectedValue = TargetItem->GetRealValue() * GetRandom(1.05f, 1.3f);
+			TargetItem->SetRealValue(EfftectedValue);
+		}
+		else {
+			float EfftectedValue = TargetItem->GetRealValue() * GetRandom(0.7f, 0.95f);
+			TargetItem->SetRealValue(EfftectedValue);
+		}
+	}
+}
+
+float AuctionSystem::GetRandom(float RangeA, float RangeB)
+{
+	random_device rd;
+	mt19937 gen(rd());
+	uniform_real_distribution<float> dis(RangeA, RangeB);
+	//랜덤 인수
+	float R = dis(gen);
+
+	return R;
+}
+
+int AuctionSystem::GetRandom(int RangeA, int RangeB)
+{
+	random_device rd;
+	mt19937 gen(rd());
+	uniform_int_distribution<int> dis(RangeA, RangeB);
+	//랜덤 인수
+	float R = dis(gen);
+
+	return R;
 }

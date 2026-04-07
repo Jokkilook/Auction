@@ -4,7 +4,11 @@
 
 Player::Player()
 {
-	AddMoney(5000000);
+	float InitMoney = 5000000.0f;
+	float Goal = InitMoney * 1.1f;
+
+	AddMoney(InitMoney);
+	SetGoal(Goal);
 
 	for (int i = 0; i < 20; i++) {
 		//PutItemToInventory(new Item());
@@ -34,9 +38,21 @@ bool Player::SellInventoryItem(int Index)
 {
 	if (Index < 0 || Index >= static_cast<int>(Inventory.size())) return false;
 
+	auto& Auction = AuctionSystem::GetInstance();
+
 	Item* item = Inventory[Index];
 	if (item) {
-		AddMoney(item->GetRealValue());
+		//호재&악재 뜨면 반영된 가격으로 판매
+		if (item->Type == Auction.News) {
+			float SellValue = item->GetRealValue() * 
+				(Auction.NewsType ? 1.3f : 0.7f);
+
+			AddMoney(SellValue);
+		}
+		else {
+			AddMoney(item->GetRealValue());
+		}
+		
 		delete item;
 	}
 

@@ -41,11 +41,14 @@ int main()
 {
 	//콘솔 설정
 	SetConsoleTitle(L"레전드 경매 게임");
-	EnableConsoleUtf8AndVT();
+	//EnableConsoleUtf8AndVT();
 	system("mode con:cols=120 lines=45");
 	FixConsoleSize();
 	
 	DrawMainMenu();
+	//DrawAuctionScreen();
+	//DrawCalculateDay();
+	//DrawPrologue();
 }
 
 //게임 흐름

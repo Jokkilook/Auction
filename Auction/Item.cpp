@@ -3,6 +3,7 @@
 
 vector<ItemData> Items = {
     {
+        ACIENT,
         "똥멍청이 동상",
         "띨빵한 게 귀엽습니다.",
         R"(
@@ -32,6 +33,7 @@ vector<ItemData> Items = {
         1500000
     },
     {
+        ACIENT,
         "영혼의 목걸이",
         "누군가의 영혼이 깃들어 있다고 전해지는 목걸이입니다-!",
         R"(              
@@ -60,6 +62,7 @@ vector<ItemData> Items = {
         2000000
     },
     {
+        NAMED,
         "에디슨의 전화기",
         "에디슨이 직접 사용했었다는 전화기입니다!",
         R"(                
@@ -87,9 +90,10 @@ vector<ItemData> Items = {
     |______________________|   
                          
 )",
-        500000
+        1800000
     },
     {
+        ACIENT,
         "금지된 마법의 고서",
         "먼지가 자욱하게 쌓여있지만, 갈피마다 강력한 마력이 흘러나옵니다.",
         R"(
@@ -109,9 +113,10 @@ vector<ItemData> Items = {
    |  |__________|____________| |
     \__________________________/
         )",
-        850000
+        1700000
     },
     {
+        MASTERPIECE,
         "고대 용사의 대검",
         "너무 거대해서 웬만한 완력으로는 들기조차 힘든 전설적인 대검입니다.",
         R"(
@@ -137,9 +142,10 @@ vector<ItemData> Items = {
              (   )
               \_/
         )",
-        950000
+        1600000
     },
     {
+        RARE,
         "해적왕의 보물상자",
         "잠겨있지만 틈새로 황금빛이 새어 나옵니다. 무엇이 들었을지 모릅니다.",
         R"(
@@ -160,9 +166,10 @@ vector<ItemData> Items = {
  |   $    * $    * $    * $     |
  |______________________________|
         )",
-        1050000
+        1800000
     },
     {
+        RARE,
         "고장난 나침반",
         "북쪽 대신 맛집만 가리키는 신기한 나침반입니다.",
         R"(
@@ -182,9 +189,10 @@ vector<ItemData> Items = {
      \                    /
       '-.______________.-'
         )",
-        400000
+        1600000
     },
     {
+        NAMED,
         "개발자의 커피컵",
         "밤샘의 흔적이 묻어있는 컵입니다. 카페인이 마르지 않습니다.",
         R"(
@@ -209,9 +217,10 @@ vector<ItemData> Items = {
       __________________
      /__________________\
         )",
-        800000
+        1700000
     },
     {
+        MASTERPIECE,
         "성기사의 황금 투구",
         "고결한 기사의 투구입니다.",
         R"(
@@ -235,9 +244,10 @@ vector<ItemData> Items = {
      \                    /
       \__________________/
         )",
-        450000
+        1500000
     },
     {
+        RARE,
         "엘릭서: 영생의 물약",
         "단 한 방울로 모든 상처를 치유하고 마력을 끝없이 채워주는 신비로운 액체입니다.",
         R"(
@@ -267,12 +277,10 @@ vector<ItemData> Items = {
 
 Item::Item()
 {
-	random_device rd;
-	mt19937 gen(rd());
-	uniform_int_distribution<int> dis(0, Items.size() - 1);
-	int R = dis(gen);
+    int R = GetRandom(0, Items.size() - 1);
 
 	ItemData Data = Items[R];
+    Type = Data.Type;
 	Name = Data.Name;
 	Description = Data.Description;
 	RealValue = Data.Value;
@@ -285,11 +293,8 @@ void Item::SetEstimatedRange()
 {
 	if (RealValue == 0) return;
 
-	random_device rd;
-	mt19937 gen(rd());
-	uniform_real_distribution<float> dis(0.0f, 1.0f);
-	//랜덤 인수
-	float R = dis(gen);
+    //랜덤 인수
+    float R = GetRandom(0.0f, 1.0f);
 
 	//오차범위
 	float W = RealValue * 0.8;
@@ -297,7 +302,30 @@ void Item::SetEstimatedRange()
 	//감정 최소값
 	long long TempMin = RealValue - (W * R);
 	MinValue = (float)((TempMin / 10000) * 10000);
+
 	//감정 최대값
 	long long TempMax = RealValue + (W * (1.0f - R));
 	MaxValue = (float)((TempMax / 10000) * 10000);
+}
+
+float Item::GetRandom(float RangeA, float RangeB)
+{
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_real_distribution<float> dis(RangeA, RangeB);
+    //랜덤 인수
+    float R = dis(gen);
+
+    return R;
+}
+
+int Item::GetRandom(int RangeA, int RangeB)
+{
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<int> dis(RangeA, RangeB);
+    //랜덤 인수
+    float R = dis(gen);
+
+    return R;
 }

@@ -20,7 +20,7 @@ public:
 	int Day = 1;
 	int Week = 1;
 
-	float Increament = 100000;
+	float Increament = 50000;
 
 	Player* CurrentPlayer = nullptr;
 
@@ -29,6 +29,9 @@ public:
 	vector<Participant*> Participants;
 
 	Item* AuctionItem = nullptr;
+
+	ItemType News = NONE;
+	int NewsType = 0;
 
 	static AuctionSystem& GetInstance() {
 		static AuctionSystem Instance;
@@ -53,4 +56,14 @@ public:
 
 	//경매 종료 함수
 	void EndAuction();	
+
+	//암시장 영향 이벤트
+	void SetNews();
+
+	//아이템에 이벤트 적용
+	void ApplyNewsToItem(Item* TargetItem);
+
+	float GetRandom(float RangeA, float RangeB);
+
+	int GetRandom(int RangeA, int RangeB);
 };

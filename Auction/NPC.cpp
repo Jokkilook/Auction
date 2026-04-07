@@ -28,7 +28,7 @@ void NPC::HandleItem(Item* TargetItem)
 	uniform_real_distribution<float> dis(0.0f, 1.0f);
 	float randomValue = dis(gen);
 
-	if (randomValue < 0.1f) {
+	if (randomValue < 0.05f) {
 		auto& Auction = AuctionSystem::GetInstance();
 		CallValue = TargetItem->CallValue + Auction.Increament * 5.0f;
 		TargetItem->CallValue = CallValue;

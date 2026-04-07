@@ -5,7 +5,17 @@
 
 using namespace std;
 
+enum ItemType {
+	NONE,
+	ART,
+	RARE,
+	ACIENT,
+	MASTERPIECE,
+	NAMED
+};
+
 struct ItemData {
+	ItemType Type;
 	string Name;
 	string Description;
 	string AsciiArt;
@@ -22,6 +32,8 @@ public:
 	string Description;
 	string AsciiArt;
 
+	ItemType Type = NONE;
+
 	float MinValue = 0;
 	float MaxValue = 0;
 	float CallValue = 0;
@@ -37,4 +49,8 @@ public:
 
 	//실제 감정가 반환 함수
 	float GetRealValue() const { return RealValue; };
+
+	float GetRandom(float RangeA, float RangeB);
+
+	int GetRandom(int RangeA, int RangeB);
 };

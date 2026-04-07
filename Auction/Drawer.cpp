@@ -210,45 +210,46 @@ void DrawMainMenu()
 
 void DrawPrologue()
 {
+	vector<string> Dialogue = {
+		".........",
+		".....",
+		"내 돈이 어디 갔지...",
+		"그 코인만 아니었어도.....",
+		"........",
+		".....",
+		"A Few Moments Later",
+		"끼얏호우-!!!",
+		"내가 복권에 당첨되다니!!!",
+		"그래... 1등은 아니지만 이 500만원으로 다시 시작해보는 거야!",
+		"뭐가 좋을까...",
+		"코인은 이제 손도 안댈거고... 주식도 무섭고...",
+		"그래! 경매를 해보자...!",
+		"값비싼 물건을 싸게 사서 비싸게 파는거야!",
+		"일주일 동안 경매를 하고 마지막 날 암시장에 비싸게 팔자...",
+		"일주일 간 수익률이 목표 금액을 못 넘으면 이것도 때려쳐버려야지!",
+		"수익율은 20%로 가는거야!",
+		"그럼 경매장으로 가볼까~"
+	};
+
 	system("cls");
 
 	//전체 프레임
 	DrawBox(1, 0, 120, 45);
 
-	TypeWrite(55, 20, ".........");
-	_getch();
-	TypeWrite(55, 20, ".....");
-	_getch();
-	TypeWrite(55, 20, "내 돈이 어디 갔지...");
-	_getch();
-	TypeWrite(55, 20, "그 코인만 아니었어도.....");
-	_getch();
-	TypeWrite(55, 20, "........");
-	_getch();
-	TypeWrite(55, 20, ".....");
-	_getch();
-	TypeWrite(55, 20, "A Few Moments Later");
-	_getch();
-	TypeWrite(55, 20, "끼얏호우-!!!");
-	_getch();
-	TypeWrite(55, 20, "내가 복권에 당첨되다니!!!");
-	_getch();
-	TypeWrite(55, 20, "그래... 1등은 아니지만 이 500만원으로 다시 시작해보는 거야!");
-	_getch();
-	TypeWrite(55, 20, "뭐가 좋을까...");
-	_getch();
-	TypeWrite(55, 20, "코인은 이제 손도 안댈거고... 주식도 무섭고...");
-	_getch();
-	TypeWrite(55, 20, "그래! 경매를 해보자...!");
-	_getch();
-	TypeWrite(55, 20, "값비싼 물건을 싸게 사서 비싸게 파는거야!");
-	_getch();
-	TypeWrite(55, 20, "일주일 동안 경매를 하고 마지막 날 암시장에 비싸게 팔자...");
-	_getch();
-	TypeWrite(55, 20, "일주일 간 수익률이 목표 금액을 못 넘으면 이것도 때려쳐버려야지!");
-	_getch();
-	TypeWrite(55, 20, "그럼 경매장으로 가볼까~");
-	_getch();
+	auto& Auction = AuctionSystem::GetInstance();
+
+	TypeWrite(55, 20, "당신의 이름은? : ");
+	string NewName;
+	std::cin >> NewName;
+
+	Auction.CurrentPlayer->SetName(NewName);
+
+	for (string S : Dialogue) {
+		TypeWrite(55, 20, S);
+		int Key = _getch();
+
+		if (Key == KEY_ESC) return;
+	}
 }
 
 const int SLOT_ROW = 7;
@@ -257,7 +258,7 @@ const int SLOT_HEIGHT = 6;
 
 void DrawAuctionScreen()
 {
-	//DrawPrologue();
+	DrawPrologue();
 
 	auto& Auction = AuctionSystem::GetInstance();
 	bool IsPlaying = true;
@@ -434,6 +435,11 @@ void DrawCalculateDay()
 {
 	auto& Auction = AuctionSystem::GetInstance();
 	Player* CurrentPlayer = Auction.CurrentPlayer;
+	Auction.SetNews();
+
+	for (auto* Item : CurrentPlayer->GetInventory()) {
+		Auction.ApplyNewsToItem(Item);
+	}
 
 	system("cls");
 
@@ -451,19 +457,48 @@ void DrawCalculateDay()
 	printf("아무도 모르는 암시장 | 암시장 이용법 : ↑↓ 선택  ←→ 판매/보류  Enter 결정");
 
 	//지갑 섹션(경매 화면이랑 같은 위치)
-	DrawBox(1, 89, 32, 6);
+	DrawBox(1, 89, 32, 8);
 	MoveCursor(2, 91);
 	printf("당신의 지갑");
 
+	string Goal = MoneyFormat(CurrentPlayer->GetGoal());
+	MoveCursor(6, 91);
+	printf("목표 금액 : %10s 원", Goal.c_str());
+
 
 	MoveCursor(4, 3);
-	printf("아이템을 판매할까요? (감정가 기준)");
+	switch (Auction.News) {
+	case NONE: {
+		printf("☞ 오늘의 뉴스!: 조용하네요.");
+		break;
+	}
+	case ART: {
+		printf("☞ 오늘의 뉴스!: 예술 시장에 %s가 들려옵니다!", Auction.NewsType ? "호재" : "악재");
+		break;
+	}
+	case RARE: {
+		printf("☞ 오늘의 뉴스!: 수집품 열풍에 %s가 들려옵니다!", Auction.NewsType ? "호재" : "악재");
+		break;
+	}
+	case ACIENT: {
+		printf("☞ 오늘의 뉴스!: 골동품 시장에 %s가 들려옵니다!", Auction.NewsType ? "호재" : "악재");
+		break;
+	}
+	case MASTERPIECE: {
+		printf("☞ 오늘의 뉴스!: 명작 시장에 %s가 들려옵니다!", Auction.NewsType ? "호재" : "악재");
+		break;
+	}
+	case NAMED: {
+		printf("☞ 오늘의 뉴스!: 명품 시장에 %s가 들려옵니다!", Auction.NewsType ? "호재" : "악재");
+		break;
+	}
+	}
 
-	MoveCursor(5, 3);
-	printf("   이름                        판매가          구매가");
+	MoveCursor(6, 3);
+	printf("   이름                        시세            구매가");
 
 	const int ListCol = 2;
-	const int ListRow = 6;
+	const int ListRow = 8;
 	const int ListVisibleRows = 24;
 	const int NextDayRow = 30;
 	const int InnerWidth = 87;
@@ -512,17 +547,42 @@ void DrawCalculateDay()
 			if (!item) continue;
 
 			MoveCursor(ListRow + i, ListCol);
+
 			const string SellPrice = MoneyFormat(item->GetRealValue());
 			const string BuyPrice = MoneyFormat(item->CallValue);
-			if (Index == SelectedIndex) {
-				printf("\033[01;33m> %-30s\033[0m", item->Name.c_str());
-				MoveCursor(ListRow + i, ListCol+30);
-				printf("\033[01;33m[%10s 원] [%10s 원]\033[0m", SellPrice.c_str(), BuyPrice.c_str());
+
+			if (item->Type == Auction.News) {
+				if (Index == SelectedIndex) {
+					printf("\033[01;33m> %-30s\033[0m", item->Name.c_str());
+					MoveCursor(ListRow + i, ListCol + 30);
+					printf("\033[01;33m[%10s 원] [%10s 원]\033[0m", SellPrice.c_str(), BuyPrice.c_str());
+				}
+				else {
+					printf("  %-30s", item->Name.c_str());
+					MoveCursor(ListRow + i, ListCol + 30);
+					printf("[%10s 원] [%10s 원]", SellPrice.c_str(), BuyPrice.c_str());
+				}
+
+				MoveCursor(ListRow + i, ListCol + 30);
+				if (Auction.NewsType) {
+					printf("\033[01;31m[%10s 원\033[0m]", SellPrice.c_str());
+				}
+				else {
+					printf("\033[01;34m[%10s 원]\033[0m", SellPrice.c_str());
+				}
+
 			}
 			else {
-				printf("  %-30s", item->Name.c_str());
-				MoveCursor(ListRow + i, ListCol+30);
-				printf("[%10s 원] [%10s 원]", SellPrice.c_str(), BuyPrice.c_str());
+				if (Index == SelectedIndex) {
+					printf("\033[01;33m> %-30s\033[0m", item->Name.c_str());
+					MoveCursor(ListRow + i, ListCol + 30);
+					printf("\033[01;33m[%10s 원] [%10s 원]\033[0m", SellPrice.c_str(), BuyPrice.c_str());
+				}
+				else {
+					printf("  %-30s", item->Name.c_str());
+					MoveCursor(ListRow + i, ListCol + 30);
+					printf("[%10s 원] [%10s 원]", SellPrice.c_str(), BuyPrice.c_str());
+				}
 			}
 		}
 
@@ -554,11 +614,12 @@ void DrawCalculateDay()
 		}
 		else {
 			Item* SelectedItem = CurrentPlayer->GetInventoryItem(SelectedIndex);
+			
 			if (SelectedItem) {
 				MoveCursor(34, 3);
 				printf("선택한 아이템 : %s", SelectedItem->Name.c_str());
 				MoveCursor(35, 3);
-				printf("판매가(감정가) : %s 원", MoneyFormat(SelectedItem->GetRealValue()).c_str());
+				printf("판매가 : %s 원", MoneyFormat(SelectedItem->GetRealValue()).c_str());
 			}
 
 			MoveCursor(37, 3);
@@ -602,6 +663,8 @@ void DrawCalculateDay()
 			StatusMessage.clear();
 
 			if (SelectedIndex == NextDayIndex) {
+				float NewGoal = CurrentPlayer->GetCurrentMoney() * 1.2f;
+				CurrentPlayer->SetGoal(NewGoal);
 				return;
 			}
 
@@ -798,7 +861,7 @@ void UpdateItem(Item* NewItem)
 	if (NewItem) {
 		//이름 출력
 		MoveCursor(2, 3);
-		printf("                                   ");
+		printf("                           ");
 		MoveCursor(2, 3);
 		printf("%s", NewItem->Name.c_str());
 		//시작가 범위 출력
