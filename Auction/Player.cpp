@@ -4,7 +4,6 @@
 
 Player::Player()
 {
-	float InitMoney = 5000000.0f;
 	float Goal = InitMoney * 1.1f;
 
 	AddMoney(InitMoney);
@@ -48,12 +47,15 @@ bool Player::SellInventoryItem(int Index)
 				(Auction.NewsType ? 1.3f : 0.7f);
 
 			AddMoney(SellValue);
+			TotalSellValue += SellValue;
 		}
 		else {
 			AddMoney(item->GetRealValue());
+			TotalSellValue += item->GetRealValue();
 		}
 		
 		delete item;
+		SellItemCount++;
 	}
 
 	Inventory.erase(Inventory.begin() + Index);
@@ -78,6 +80,8 @@ bool Player::PurchaseItem(Item* NewItem)
 	if (PutItemToInventory(NewItem)) {
 		//성공하면 돈 차감
 		SpendMoney(NewItem->CallValue);
+		TotalBuyValue += NewItem->CallValue;
+		BuyItemCount++;
 		return true;
 	}
 

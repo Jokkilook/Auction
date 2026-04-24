@@ -47,3 +47,6 @@ void PurchaseSequence(const Item* PurchasedItem);
 
 //플레이어 포기 시퀀스
 void GiveupSequence();
+
+//하루 결과 화면 그리기 함수
+void DayResultScreen();

@@ -12,6 +12,11 @@ class Player : public Participant
 	vector<Item*> Inventory;
 
 	float Goal;
+	float InitMoney = 5000000.0f;
+	int BuyItemCount = 0;
+	int SellItemCount = 0;
+	float TotalBuyValue = 0.0f;
+	float TotalSellValue = 0.0f;
 
 public:
 
@@ -50,4 +55,22 @@ public:
 
 	//목표 금액 반환 함수
 	float GetGoal() const { return Goal; };
+
+	//초기 금액 설정 함수
+	void SetInitMoney(float NewInit) { InitMoney = NewInit; }
+
+	//초기 금액 반환 함수
+	float GetInitMoney() const { return InitMoney; }
+
+	//구매 아이템 개수 반환 함수
+	int GetBuyItemCount() const { return BuyItemCount; }
+
+	//총 구매 가격 반환 함수
+	float GetTotalBuyValue() const { return TotalBuyValue; }
+
+	//판매 아이템 개수 반환 함수
+	int GetSellItemCount() const { return SellItemCount; }
+
+	//총 판매 가격 반환 함수
+	float GetTotalSellValue() const { return TotalSellValue; }
 };

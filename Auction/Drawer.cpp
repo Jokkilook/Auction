@@ -7,6 +7,7 @@
 #include <sstream>
 #include <limits>
 #include <iostream>
+#include <random>
 
 using namespace std;
 
@@ -258,6 +259,8 @@ const int SLOT_HEIGHT = 6;
 
 void DrawAuctionScreen()
 {
+	//DayResultScreen(); return;
+
 	DrawPrologue();
 
 	auto& Auction = AuctionSystem::GetInstance();
@@ -640,6 +643,7 @@ void DrawCalculateDay()
 
 		//입력 받기
 		int Key = _getch();
+
 		if (Key == 0 || Key == 224) {
 			Key = _getch();
 			switch (Key) {
@@ -663,8 +667,7 @@ void DrawCalculateDay()
 			StatusMessage.clear();
 
 			if (SelectedIndex == NextDayIndex) {
-				float NewGoal = CurrentPlayer->GetCurrentMoney() * 1.2f;
-				CurrentPlayer->SetGoal(NewGoal);
+				DayResultScreen();
 				return;
 			}
 
@@ -682,6 +685,7 @@ void DrawCalculateDay()
 				}
 
 				if (CurrentPlayer->GetInventoryCount() == 0) {
+					DayResultScreen();
 					return;
 				}
 
@@ -950,4 +954,129 @@ void GiveupSequence()
 	printf("네! 포기자는 저~~~~ 짝으로 빠져주시기 바랍니다!");
 	_getch();
 	ClearLogSection();
+}
+
+void DayResultScreen()
+{
+	vector<string> PassDialogue = {
+		"끼얏호우~! 쏠쏠하게 벌었다!",
+		"이번 주도 알차게 보냈군!",
+		"좋은 물건이 많았어...",
+		"목표 금액을 채웠다!",
+		"빨리 다음 주가 왔으면 좋겠다~"
+	};
+
+	vector<string> FailDialogue = {
+		"역시 난 안되나봐...",
+		"왜 이런 물건밖에 안나오는거야!!",
+		"내 돈.....",
+		"이런 XX",
+		"나 안할래."
+	};
+
+	system("cls");
+
+	DrawBox(1, 0, 120, 50);
+
+	AuctionSystem& Auction = AuctionSystem::GetInstance();
+
+	//목표 금액을 넘기면 다음 날로
+	if(Auction.CurrentPlayer->GetCurrentMoney() >= Auction.CurrentPlayer->GetGoal()){
+
+		//새로운 목표 금액 설정
+		float NewGoal = Auction.CurrentPlayer->GetCurrentMoney() * 1.2;
+		Auction.CurrentPlayer->SetGoal(NewGoal);
+
+		//메시지 출력
+		std::random_device rd;
+		std::mt19937 gen(rd());
+		std::uniform_int_distribution<> dis(0, PassDialogue.size() - 1);
+		int Index = dis(gen);
+
+		TypeWrite(55, 20, PassDialogue[Index]);
+		int Key = _getch();
+
+		if (Key == KEY_ESC) return;
+	}
+	//못 넘기면 게임 오버
+	else {
+
+		int SpendDay = Auction.Day;
+		float FinalMoney = Auction.CurrentPlayer->GetCurrentMoney();
+		float GainLoss = Auction.CurrentPlayer->GetCurrentMoney() - Auction.CurrentPlayer->GetInitMoney();
+		float TotalBuyValue = Auction.CurrentPlayer->GetTotalBuyValue();
+		float TotalSellValue = Auction.CurrentPlayer->GetTotalSellValue();
+		int BuyItemCount = Auction.CurrentPlayer->GetBuyItemCount();
+		int SellItemCount = Auction.CurrentPlayer->GetSellItemCount();
+		float EarningRate = ((Auction.CurrentPlayer->GetCurrentMoney() - Auction.CurrentPlayer->GetInitMoney()) / Auction.CurrentPlayer->GetInitMoney()) * 100;
+
+		string FinalMoneyString = MoneyFormat(FinalMoney);
+		string GainLossString = MoneyFormat(GainLoss);
+		string TotalBuyValueString = MoneyFormat(TotalBuyValue);
+		string TotalSellValueString = MoneyFormat(TotalSellValue);
+
+		DrawBox(12, 30, 60, 22);
+		
+		//메시지 출력
+		std::random_device rd;
+		std::mt19937 gen(rd());
+		std::uniform_int_distribution<> dis(0, FailDialogue.size() - 1);
+		int Index = dis(gen);
+		TypeWrite(55, 10, FailDialogue[Index]);
+
+		MoveCursor(14, 35);
+		printf("%s : %d일", "진행한 날 수", SpendDay);
+
+		MoveCursor(17, 35);
+		printf("총 구매한 경매품 개수");
+		MoveCursor(17, 72);
+		printf("%10d 개", BuyItemCount);
+
+		MoveCursor(19, 35);
+		printf("총 판매한 경매품 개수");
+		MoveCursor(19, 72);
+		printf("%10d 개", SellItemCount);
+
+		MoveCursor(21, 35);
+		printf("총 구매 금액");
+		MoveCursor(21, 72);
+		printf("%10s 원", TotalBuyValueString.c_str());
+
+		MoveCursor(23, 35);
+		printf("총 판매 금액");
+		MoveCursor(23, 72);
+		printf("%10s 원", TotalSellValueString.c_str());
+
+		MoveCursor(25, 35);
+		printf("잔액");
+		MoveCursor(25, 72);
+		printf("%10s 원", FinalMoneyString.c_str());
+
+		MoveCursor(27, 35);
+		printf("손익");
+		MoveCursor(27, 72);
+		if (GainLoss < 0) {
+			printf("\033[01;34m%10s\033[0m 원", GainLossString.c_str());
+		}
+		else {
+			printf("\033[01;31m%10s\033[0m 원", GainLossString.c_str());
+		}
+
+		MoveCursor(29, 35);
+		printf("수익률");
+		MoveCursor(29, 72);
+		if (EarningRate < 0) {
+			printf("\033[01;34m%10.2f %%\033[0m", EarningRate);
+		}
+		else {
+			printf("\033[01;31m%10.2f %%\033[0m", EarningRate);
+		}
+
+		MoveCursor(31, 46);
+		printf("아무 키나 눌러 메인메뉴로...");
+
+		int Key = _getch();
+
+		if (Key == KEY_ESC) return;
+	}
 }
