@@ -10,10 +10,16 @@ void MoveCursor(int row, int col);
 void DrawBox(int row, int col, int width, int height);
 
 //아스키 아트 그리기 함수
-
+void PrintAsciiAtLocation(int row, int col, const char* ascii);
 
 //메인 메뉴 그리기 함수
 void DrawMainMenu();
+
+//게임 정보 그리기 함수
+void DrawGameInfo();
+
+//일시 정지 화면 그리기 함수
+bool DrawPauseScreen();
 
 //프롤로그 그리기 함수
 void DrawPrologue();
@@ -22,16 +28,16 @@ void DrawPrologue();
 void DrawAuctionScreen();
 
 //정산날 그리기 함수
-void DrawCalculateDay();
+bool DrawCalculateDay();
 
 //로그 섹션 클리어 함수
 void ClearLogSection();
 
 //경매가 입력 시퀀스
-void CallValueSequence(Item* NewItem);
+bool CallValueSequence(Item* NewItem);
 
 //플레이어 선택 시퀀스
-bool PlayerSelectionSequence();
+bool PlayerSelectionSequence(bool& OutExitToMenu);
 
 //아이템 데이터 업데이트 함수
 void UpdateItem(Item* NewItem);
@@ -48,5 +54,5 @@ void PurchaseSequence(const Item* PurchasedItem);
 //플레이어 포기 시퀀스
 void GiveupSequence();
 
-//하루 결과 화면 그리기 함수
-void DayResultScreen();
+//한주 결과 화면 그리기 함수
+bool WeekResultScreen();

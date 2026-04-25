@@ -44,7 +44,13 @@ vector<string> messages = {
 	"경매를 시작합니다!",
 	"흥미로운 물건이 나왔군요.",
 	"이건 아주 희귀한 물건입니다!",
-	"이 물건의 가치를 알아보실 수 있으실까요?"
+	"이 물건의 가치를 알아보실 수 있으실까요?",
+	"오늘의 물건입니다!",
+	"오늘도 재밌는 물건이 나왔군요!",
+	"자~ 오늘의 물건을 보시죠!",
+	"경매가 시작됩니다!",
+	"여러분의 안목을 시험해보시죠!",
+	"아....이건...."
 };
 
 void ClearBuffer() {
@@ -56,15 +62,23 @@ void ClearBuffer() {
 
 string MoneyFormat(float value) {
 
-	// 소수점 버리고 정수로 변환
-	string s = to_string((long long)value); 	
-	int insertPos = s.length() - 3;
+	// 1. 음수 여부 확인 및 절대값 취하기
+	bool isNegative = value < 0;
+	long long num = std::abs((long long)value);
 
+	// 2. 숫자를 문자열로 변환
+	std::string s = std::to_string(num);
+
+	// 3. 뒤에서부터 3자리마다 콤마 삽입
+	// (int) 형변환을 통해 언더플로우 방지
+	int insertPos = (int)s.length() - 3;
 	while (insertPos > 0) {
 		s.insert(insertPos, ",");
 		insertPos -= 3;
 	}
-	return s;
+
+	// 4. 음수였다면 다시 '-' 붙여서 반환
+	return isNegative ? "-" + s : s;
 }
 
 void TypeWrite(int X, int Y, const std::string& Text, int Delay = 50) {
@@ -125,6 +139,12 @@ void DrawBox(int row, int col, int width, int height)
 	printf("┘");
 }
 
+void PrintAsciiAtLocation(int row, int col, const char* ascii)
+{
+	//row, col 위치에 ascii 출력
+	printf("\033[%d;%dH%s", row, col, ascii);
+}
+
 void DrawAsciiArt(int X, int Y, const string& AsciiArt) {
 	stringstream ss(AsciiArt);
 	string Line;
@@ -139,6 +159,22 @@ void DrawAsciiArt(int X, int Y, const string& AsciiArt) {
 
 void DrawMainMenu()
 {
+	static const char* Logo[13] = {
+"			 \033[33m_____  _   _  _____      ___  ___  ___  ___   ______ _____  _   _  _____  ",
+"			\033[33m|_   _|| | | ||  ___|    / _ \\ |  \\/  | / _ \\ |___  /|_   _|| \\ | ||  __ \\ ",
+"			  \033[33m| |  | |_| || |__     / /_\\ \\| .  . |/ /_\\ \\   / /   | |  |  \\| || |  \\/ ",
+"			  \033[33m| |  |  _  ||  __|    |  _  || |\\/| ||  _  |  / /    | |  | . ` || | __  ",
+"			  \033[33m| |  | | | || |___    | | | || |  | || | | |./ /___ _| |_ | |\\  || |_\\ \\ ",
+"			  \033[33m\\_/  \\_| |_/\\____/    \\_| |_/\\_|  |_/\\_| |_/\\_____/ \\___/ \\_| \\_/ \\____/ ",
+"	",
+"	  \033[31m______  _____  _____  _____  _____   ___   _          ___   _   _  _____  _____  _____  _____  _   _ ",
+"	  \033[34m|  _  \\|_   _||  __ \\|_   _||_   _| / _ \\ | |        / _ \\ | | | |/  __ \\|_   _||_   _||  _  || \\ | |",
+"	  \033[33m| | | |  | |  | |  \\/  | |    | |  / /_\\ \\| |       / /_\\ \\| | | || /  \\/  | |    | |  | | | ||  \\| |",
+"	  \033[31m| | | |  | |  | | __   | |    | |  |  _  || |       |  _  || | | || |      | |    | |  | | | || . ` |",
+"	  \033[34m| |/ /  _| |_ | |_\\ \\ _| |_   | |  | | | || |____   | | | || |_| || \\__/\\  | |   _| |_ \\ \\_/ /| |\\  |",
+"	  \033[31m|___/   \\___/  \\____/ \\___/   \\_/  \\_| |_/\\_____/   \\_| |_/ \\___/  \\____/  \\_/   \\___/  \\___/ \\_| \\_/\033[0m",
+	};
+
 	const char* menus[] = {
 	"게임 시작",
 	"게임 정보",
@@ -157,6 +193,10 @@ void DrawMainMenu()
 
 		int MenuRow = 30;
 		int MenuCol = 50;
+
+		for (int i = 0; i < sizeof(Logo) / sizeof(Logo[0]); ++i) {
+			PrintAsciiAtLocation(8+i, 4, Logo[i]);
+		}
 
 		//메뉴 박스
 		DrawBox(MenuRow, 50, 15, 7);
@@ -177,6 +217,7 @@ void DrawMainMenu()
 
 			MoveCursor(MenuRow+4, 62);
 
+			while (_kbhit()) _getch();
 			int key = _getch();
 
 			if (key == 0 || key == 224) {
@@ -197,11 +238,162 @@ void DrawMainMenu()
 					select = 0;
 					break;
 				case 1:
-					//drawInfo();
+					DrawGameInfo();
 					select = 0;
 					break;
 				case 2:
 					exit(0);
+					break;
+				}
+			}
+		}
+	}
+}
+
+void DrawGameInfo()
+{
+	system("cls");
+
+	//전체 프레임
+	DrawBox(1, 0, 120, 45);
+
+	int Row = 3;
+	int Col = 5;
+	int Step = 2;
+	int Count = 0;
+
+	MoveCursor(Row++, 2);
+	printf("===================================================== \033[01;34m게임 정보\033[0m ======================================================");
+	Row += 2;
+	MoveCursor(Row+(Step*Count++), Col);
+	printf("똥 손같은 투자로 전재산을 홀라당 잃어버린 당신");
+	MoveCursor(Row + (Step * Count++), Col);
+	printf("어느 날 복권에 당첨되어 500만원을 얻게되는데...");
+	MoveCursor(Row + (Step * Count++), Col);
+	printf("레전드로 망한 투자대신 고른 것은 경매!");
+	MoveCursor(Row + (Step * Count++), Col);
+	printf("일주일 동안 경매로 물건을 사들이고, 판매하여 돈을 벌기로 한다.");
+	MoveCursor(Row + (Step * Count++), Col);
+	printf("이번엔 현명하게 수익이 목표치를 넘기지 못하면 그만 둔다는데... 과연 얼마나 이어갈 수 있을까?");
+
+	Row += (Step * Count++)+1;
+	Count = 0;
+
+	MoveCursor(Row++, 2);
+	printf("===================================================== \033[01;34m조작 방법\033[0m ======================================================");
+	Row += 2;
+
+	MoveCursor(Row + (Step * Count++), Col);
+	printf("\033[1;32m←, → : 고르기 | Enter : 선택\033[0m");
+	MoveCursor(Row + (Step * Count++), Col);
+	printf("\033[1;32mESC : PAUSE 메뉴\033[0m");
+	MoveCursor(Row + (Step * Count++), Col);
+	printf("\033[1;32m시작가 입력 : 숫자 입력 후 Enter\033[0m");
+
+	MoveCursor(43, 5);
+	printf("아무 키나 누르면 메인 메뉴로 돌아갑니다...");
+	while (_kbhit()) _getch();
+	_getch();
+}
+
+bool DrawPauseScreen()
+{
+	const char* Menus[] = {
+		"돌아가기",
+		"나가기"
+	};
+
+	int Selected = 0;
+	const int MenuCount = 2;
+
+	while (true) {
+		ClearLogSection();
+
+		DrawBox(34, 35, 50, 11);
+		MoveCursor(35, 56);
+		printf("일시정지");
+
+		for (int i = 0; i < MenuCount; i++) {
+			MoveCursor(38 + (i * 2), 44);
+			if (i == Selected) {
+				printf("\033[01;33m> %s\033[0m", Menus[i]);
+			}
+			else {
+				printf("  %s", Menus[i]);
+			}
+		}
+
+		MoveCursor(43, 38);
+		printf("ESC : 돌아가기");
+
+		while (_kbhit()) _getch();
+		int Key = _getch();
+
+		if (Key == KEY_ESC) {
+			ClearLogSection();
+			return true;
+		}
+
+		if (Key == 0 || Key == 224) {
+			Key = _getch();
+			switch (Key) {
+			case KEY_UP:
+				Selected = (Selected - 1 + MenuCount) % MenuCount;
+				break;
+			case KEY_DOWN:
+				Selected = (Selected + 1) % MenuCount;
+				break;
+			}
+		}
+		else if (Key == KEY_ENTER) {
+			// 돌아가기
+			if (Selected == 0) {
+				ClearLogSection();
+				return true;
+			}
+
+			// 나가기 확인
+			int ConfirmSelected = 0; // 0 = 예, 1 = 아니오
+			while (true) {
+				ClearLogSection();
+
+				DrawBox(34, 25, 70, 11);
+				MoveCursor(36, 37);
+				printf("정말 나가시겠습니까?");
+
+				MoveCursor(39, 45);
+				if (ConfirmSelected == 0) {
+					printf("\033[01;33m[예]\033[0m   [아니오]");
+				}
+				else {
+					printf("[예]   \033[01;33m[아니오]\033[0m");
+				}
+
+				MoveCursor(43, 33);
+				printf("←→ 선택  Enter 결정  ESC 취소");
+
+				while (_kbhit()) _getch();
+				int ConfirmKey = _getch();
+				if (ConfirmKey == KEY_ESC) {
+					break;
+				}
+
+				if (ConfirmKey == 0 || ConfirmKey == 224) {
+					ConfirmKey = _getch();
+					switch (ConfirmKey) {
+					case KEY_LEFT:
+					case KEY_RIGHT:
+						ConfirmSelected = 1 - ConfirmSelected;
+						break;
+					}
+				}
+				else if (ConfirmKey == KEY_ENTER) {
+					if (ConfirmSelected == 0) {
+						ClearLogSection();
+						return false;
+					}
+
+					// 아니오 -> 퍼즈 메뉴로
 					break;
 				}
 			}
@@ -237,6 +429,9 @@ void DrawPrologue()
 	//전체 프레임
 	DrawBox(1, 0, 120, 45);
 
+	MoveCursor(2, 3);
+	printf("\033[01;34m이름 입력 후 ESC를 누르면 건너뛸 수 있습니다.\033[0m");
+
 	auto& Auction = AuctionSystem::GetInstance();
 
 	TypeWrite(55, 20, "당신의 이름은? : ");
@@ -247,6 +442,7 @@ void DrawPrologue()
 
 	for (string S : Dialogue) {
 		TypeWrite(55, 20, S);
+		while (_kbhit()) _getch();
 		int Key = _getch();
 
 		if (Key == KEY_ESC) return;
@@ -259,7 +455,7 @@ const int SLOT_HEIGHT = 6;
 
 void DrawAuctionScreen()
 {
-	//DayResultScreen(); return;
+	//WeekResultScreen(); return;
 
 	DrawPrologue();
 
@@ -325,7 +521,7 @@ void DrawAuctionScreen()
 
 			//날짜 업뎃
 			MoveCursor(32, 92);
-			printf("%d 주차 %d 일째", Auction.Week, Auction.Day);
+			printf("%d 주차 %d 일째", Auction.Week, Auction.Day%7 ? Auction.Day%7 : 7);
 			//NPC별 행동 - 경매가 올리기 or 포기
 			int Index = 0;
 			for (Participant* Part : Auction.Participants) 
@@ -361,7 +557,7 @@ void DrawAuctionScreen()
 					Auction.EndAuction();
 					PurchaseSequence(PurchasedItem);
 					if (IsCalculateDay) {
-						DrawCalculateDay();
+						if (!DrawCalculateDay()) return;
 					}
 					Auction.StartAuction();
 					break;
@@ -372,9 +568,10 @@ void DrawAuctionScreen()
 				ClearLogSection();
 				MoveCursor(34, 3);
 				printf("\033[1;31m낙찰되었지만 구매할 수 없었습니다...\033[0m");
+				while (_kbhit()) _getch();
 				_getch();
 				if (IsCalculateDay) {
-					DrawCalculateDay();
+					if (!DrawCalculateDay()) return;
 				}
 				Auction.StartAuction();
 				break;
@@ -396,32 +593,54 @@ void DrawAuctionScreen()
 
 					int Key = 0;
 					while (Key != KEY_ENTER) {
+						while (_kbhit()) _getch();
 						Key = _getch();
+						if (Key == KEY_ESC) {
+							if (!DrawPauseScreen()) {
+								Auction.ResetGame();
+								return;
+							}
+							ClearLogSection();
+							MoveCursor(34, 3);
+							printf("\033[1;31m경매에 참여할 자금이 부족하네요.\033[0m");
+							MoveCursor(35, 3);
+							printf("Enter를 누르면 다음날로 넘어갑니다.");
+							Key = 0;
+							continue;
+						}
 						if (Key == 0 || Key == 224) _getch();
 					}
 
 					Auction.EndAuction();
 					if (IsCalculateDay) {
-						DrawCalculateDay();
+						if (!DrawCalculateDay()) return;
 					}
 					Auction.StartAuction();
 					break;
 				}
 
 				ClearLogSection();
-				CallValueSequence(Auction.AuctionItem);
+				if (!CallValueSequence(Auction.AuctionItem)) {
+					Auction.ResetGame();
+					return;
+				}
 			}
 			//경매가 입력이 완료 됐으면 플레이어 입력 받기 - 경매가 올리기 or 포기
 			else 
 			{
 				ClearLogSection();
 				//포기했으면!
-				if (!PlayerSelectionSequence()) {
+				bool ExitToMenu = false;
+				if (!PlayerSelectionSequence(ExitToMenu)) {
+					if (ExitToMenu) {
+						Auction.ResetGame();
+						return;
+					}
 					const bool IsCalculateDay = (Auction.Day == 7);
 					Auction.EndAuction();
 					GiveupSequence();
 					if (IsCalculateDay) {
-						DrawCalculateDay();
+						if (!DrawCalculateDay()) return;
 					}
 					Auction.StartAuction();
 					if (IsCalculateDay) {
@@ -434,7 +653,7 @@ void DrawAuctionScreen()
 	
 }
 
-void DrawCalculateDay()
+bool DrawCalculateDay()
 {
 	auto& Auction = AuctionSystem::GetInstance();
 	Player* CurrentPlayer = Auction.CurrentPlayer;
@@ -512,7 +731,7 @@ void DrawCalculateDay()
 	string StatusMessage;
 
 	while (true) {
-		if (!CurrentPlayer) return;
+		if (!CurrentPlayer) return false;
 
 		UpdateWallet(CurrentPlayer);
 
@@ -568,7 +787,7 @@ void DrawCalculateDay()
 
 				MoveCursor(ListRow + i, ListCol + 30);
 				if (Auction.NewsType) {
-					printf("\033[01;31m[%10s 원\033[0m]", SellPrice.c_str());
+					printf("\033[01;31m[%10s 원]\033[0m", SellPrice.c_str());
 				}
 				else {
 					printf("\033[01;34m[%10s 원]\033[0m", SellPrice.c_str());
@@ -642,6 +861,7 @@ void DrawCalculateDay()
 		}
 
 		//입력 받기
+		while (_kbhit()) _getch();
 		int Key = _getch();
 
 		if (Key == 0 || Key == 224) {
@@ -667,8 +887,7 @@ void DrawCalculateDay()
 			StatusMessage.clear();
 
 			if (SelectedIndex == NextDayIndex) {
-				DayResultScreen();
-				return;
+				return WeekResultScreen();
 			}
 
 			//판매
@@ -685,8 +904,7 @@ void DrawCalculateDay()
 				}
 
 				if (CurrentPlayer->GetInventoryCount() == 0) {
-					DayResultScreen();
-					return;
+					return WeekResultScreen();
 				}
 
 				const int NewCount = CurrentPlayer->GetInventoryCount();
@@ -700,6 +918,8 @@ void DrawCalculateDay()
 			}
 		}
 	}
+
+	return true;
 }
 
 void ClearLogSection()
@@ -720,6 +940,7 @@ int CustomGetInt(int x, int y) {
 		// 커서를 다시 숫자 바로 뒤로 이동 (이게 핵심!)
 		MoveCursor(y, x + (int)input.length());
 
+		while (_kbhit()) _getch();
 		int c = _getch(); // char 대신 int로 받는 게 확장키 대응에 좋습니다.
 
 		if (c >= '0' && c <= '9') {
@@ -739,10 +960,15 @@ int CustomGetInt(int x, int y) {
 			// 엔터를 치는 순간 그 줄을 깔끔하게 유지하기 위해 루프 종료
 			return stoi(input);
 		}
+		else if (c == KEY_ESC) {
+			// 퍼즈 메뉴
+			if (!DrawPauseScreen()) return -1; // 메인 메뉴로 나가기
+			return -2; // 돌아가기(입력 다시 받기)
+		}
 	}
 }
 
-void CallValueSequence(Item* NewItem)
+bool CallValueSequence(Item* NewItem)
 {
 	auto& Auction = AuctionSystem::GetInstance();
 
@@ -754,7 +980,17 @@ void CallValueSequence(Item* NewItem)
         printf("시작가를 입력하세요 : ");
         
         // CustomGetInt가 엔터를 칠 때까지 여기서 대기합니다.
-        InputValue = CustomGetInt(25, 34); 
+        InputValue = CustomGetInt(25, 34);
+
+		// ESC -> 퍼즈 메뉴 처리 결과
+		if (InputValue == -1) {
+			return false; // 메인 메뉴로
+		}
+		if (InputValue == -2) {
+			ClearLogSection();
+			continue; // 입력 다시 받기
+		}
+
 		ClearLogSection();
 
         // 조건 검사
@@ -768,17 +1004,21 @@ void CallValueSequence(Item* NewItem)
             MoveCursor(35, 3);
             printf("\033[1;31m시작가 범위 내 가격으로 입력해주세요!\033[0m");
         }
-        else 
-        {
-            NewItem->CallValue = (float)InputValue;
-            Auction.CurrentPlayer->SetCallValue((float)InputValue);
-            return;
-        }
-    }
+         else 
+         {
+             NewItem->CallValue = (float)InputValue;
+             Auction.CurrentPlayer->SetCallValue((float)InputValue);
+             return true;
+         }
+     }
+
+	return true;
 }
 
-bool PlayerSelectionSequence()
+bool PlayerSelectionSequence(bool& OutExitToMenu)
 {
+	OutExitToMenu = false;
+
 	int Selected = 0;
 	int OptionsSize = 2;
 	int IsSelecting = 1;
@@ -811,7 +1051,18 @@ bool PlayerSelectionSequence()
 		}
 
 		//플레이어 입력 받기
+		while (_kbhit()) _getch();
 		int Key = _getch();
+
+		//ESC 입력 시 퍼즈 메뉴
+		if (Key == KEY_ESC) {
+			if (!DrawPauseScreen()) {
+				OutExitToMenu = true;
+				return false;
+			}
+			ClearLogSection();
+			continue;
+		}
 
 		//방향기 좌우 입력 시
 		if (Key == 0 || Key == 224) 
@@ -931,6 +1182,7 @@ void PurchaseSequence(const Item* PurchasedItem)
 	ClearLogSection();
 	MoveCursor(34, 3);
 	printf("오늘 물건의 낙찰자는 %s 님!!", Auction.CurrentPlayer->GetName().c_str());
+	while (_kbhit()) _getch();
 	_getch();
 	MoveCursor(35, 3);
 	if (PurchasedItem) {
@@ -940,9 +1192,11 @@ void PurchaseSequence(const Item* PurchasedItem)
 	else {
 		printf("낙찰 정보를 불러오지 못했습니다!");
 	}
+	while (_kbhit()) _getch();
 	_getch();
 	MoveCursor(36, 3);
 	printf("다음에 또 만나요.");
+	while (_kbhit()) _getch();
 	_getch();
 
 }
@@ -952,18 +1206,29 @@ void GiveupSequence()
 	ClearLogSection();
 	MoveCursor(34, 3);
 	printf("네! 포기자는 저~~~~ 짝으로 빠져주시기 바랍니다!");
+	while (_kbhit()) _getch();
 	_getch();
 	ClearLogSection();
 }
 
-void DayResultScreen()
+bool WeekResultScreen()
 {
+	static const char* GameOverLogo[6] = {
+"\033[31m _____   ___  ___  ___ _____   _____  _   _  _____ ______ ",
+"|  __ \\ / _ \\ |  \\/  ||  ___| |  _  || | | ||  ___|| ___ \\",
+"| |  \\// /_\\ \\| .  . || |__   | | | || | | || |__  | |_/ /",
+"| | __ |  _  || |\\/| ||  __|  | | | || | | ||  __| |    / ",
+"| |_\\ \\| | | || |  | || |___  \\ \\_/ /\\ \\_/ /| |___ | |\\ \\ ",
+" \\____/\\_| |_/\\_|  |_/\\____/   \\___/  \\___/ \\____/ \\_| \\_|\033[0m"
+	};
+
 	vector<string> PassDialogue = {
 		"끼얏호우~! 쏠쏠하게 벌었다!",
 		"이번 주도 알차게 보냈군!",
 		"좋은 물건이 많았어...",
 		"목표 금액을 채웠다!",
-		"빨리 다음 주가 왔으면 좋겠다~"
+		"빨리 다음 주가 왔으면 좋겠다~",
+		"목표치는 채웠구만"
 	};
 
 	vector<string> FailDialogue = {
@@ -974,9 +1239,21 @@ void DayResultScreen()
 		"나 안할래."
 	};
 
+	vector<string> GoodFailDialogue = {
+		"이 정도 벌었으면 됐다..ㅎ",
+		"너무 욕심내지 말자",
+		"그래 이거라도 어디야!",
+		"운은 여기까진가 보다",
+		"재미 좀 봤구만!"
+	};
+
 	system("cls");
 
 	DrawBox(1, 0, 120, 50);
+
+	for (int i = 0; i < sizeof(GameOverLogo) / sizeof(GameOverLogo[0]); ++i) {
+		PrintAsciiAtLocation(4 + i, 31, GameOverLogo[i]);
+	}
 
 	AuctionSystem& Auction = AuctionSystem::GetInstance();
 
@@ -994,9 +1271,9 @@ void DayResultScreen()
 		int Index = dis(gen);
 
 		TypeWrite(55, 20, PassDialogue[Index]);
-		int Key = _getch();
-
-		if (Key == KEY_ESC) return;
+		while (_kbhit()) _getch();
+		_getch();
+		return true;
 	}
 	//못 넘기면 게임 오버
 	else {
@@ -1015,14 +1292,14 @@ void DayResultScreen()
 		string TotalBuyValueString = MoneyFormat(TotalBuyValue);
 		string TotalSellValueString = MoneyFormat(TotalSellValue);
 
-		DrawBox(12, 30, 60, 22);
+		DrawBox(14, 30, 60, 22);
 		
 		//메시지 출력
 		std::random_device rd;
 		std::mt19937 gen(rd());
 		std::uniform_int_distribution<> dis(0, FailDialogue.size() - 1);
 		int Index = dis(gen);
-		TypeWrite(55, 10, FailDialogue[Index]);
+		TypeWrite(55, 12, EarningRate<0 ? FailDialogue[Index] : GoodFailDialogue[Index]);
 
 		MoveCursor(14, 35);
 		printf("%s : %d일", "진행한 날 수", SpendDay);
@@ -1039,27 +1316,27 @@ void DayResultScreen()
 
 		MoveCursor(21, 35);
 		printf("총 구매 금액");
-		MoveCursor(21, 72);
-		printf("%10s 원", TotalBuyValueString.c_str());
+		MoveCursor(21, 62);
+		printf("%20s 원", TotalBuyValueString.c_str());
 
 		MoveCursor(23, 35);
 		printf("총 판매 금액");
-		MoveCursor(23, 72);
-		printf("%10s 원", TotalSellValueString.c_str());
+		MoveCursor(23, 62);
+		printf("%20s 원", TotalSellValueString.c_str());
 
 		MoveCursor(25, 35);
 		printf("잔액");
-		MoveCursor(25, 72);
-		printf("%10s 원", FinalMoneyString.c_str());
+		MoveCursor(25, 62);
+		printf("%20s 원", FinalMoneyString.c_str());
 
 		MoveCursor(27, 35);
 		printf("손익");
-		MoveCursor(27, 72);
+		MoveCursor(27, 62);
 		if (GainLoss < 0) {
-			printf("\033[01;34m%10s\033[0m 원", GainLossString.c_str());
+			printf("\033[01;34m%20s\033[0m 원", GainLossString.c_str());
 		}
 		else {
-			printf("\033[01;31m%10s\033[0m 원", GainLossString.c_str());
+			printf("\033[01;31m%20s\033[0m 원", GainLossString.c_str());
 		}
 
 		MoveCursor(29, 35);
@@ -1072,11 +1349,13 @@ void DayResultScreen()
 			printf("\033[01;31m%10.2f %%\033[0m", EarningRate);
 		}
 
-		MoveCursor(31, 46);
+		MoveCursor(33, 46);
 		printf("아무 키나 눌러 메인메뉴로...");
 
-		int Key = _getch();
+		while (_kbhit()) _getch();
+		_getch();
 
-		if (Key == KEY_ESC) return;
+		Auction.ResetGame();
+		return false;
 	}
 }

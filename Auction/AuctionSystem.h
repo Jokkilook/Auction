@@ -57,6 +57,9 @@ public:
 	//경매 종료 함수
 	void EndAuction();	
 
+	//게임 초기화(게임 오버 후 새 게임용)
+	void ResetGame();
+
 	//암시장 영향 이벤트
 	void SetNews();
 

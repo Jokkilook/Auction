@@ -50,9 +50,6 @@ int main()
 	FixConsoleSize();
 	
 	DrawMainMenu();
-	//DrawAuctionScreen();
-	//DrawCalculateDay();
-	//DrawPrologue();
 }
 
 //게임 흐름

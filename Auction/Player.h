@@ -8,7 +8,7 @@ using namespace std;
 
 class Player : public Participant
 {
-	string Name = "빵빵이";
+	string Name = "스꾸삐";
 	vector<Item*> Inventory;
 
 	float Goal;

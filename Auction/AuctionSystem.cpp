@@ -97,10 +97,40 @@ void AuctionSystem::EndAuction()
 	}
 
 	Day++;
-	if (Day > 7) {
+	if (Day%7 == 1) {
 		Week++;
-		Day = 1;
 	}
+}
+
+void AuctionSystem::ResetGame()
+{
+	if (AuctionItem) {
+		delete AuctionItem;
+		AuctionItem = nullptr;
+	}
+
+	for (NPC* npc : Npcs) {
+		delete npc;
+	}
+	Npcs.clear();
+
+	Participants.clear();
+
+	if (CurrentPlayer) {
+		delete CurrentPlayer;
+		CurrentPlayer = nullptr;
+	}
+
+	Day = 1;
+	Week = 1;
+	Increament = 50000;
+	News = NONE;
+	NewsType = 0;
+
+	CurrentPlayer = new Player();
+	Participants.push_back(CurrentPlayer);
+
+	StartAuction();
 }
 
 void AuctionSystem::SetNews()
