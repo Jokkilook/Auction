@@ -495,7 +495,7 @@ void DrawAuctionScreen()
 			//플레이어 데이터 쓰기
 			if (i == 0) 
 			{
-				printf("당신");
+				printf("%s", Auction.CurrentPlayer->GetName().c_str());
 			}
 			//NPC 데이터 쓰기
 			else 
@@ -1132,7 +1132,7 @@ void UpdateItem(Item* NewItem)
 
 		//설명 출력
 		MoveCursor(32, 3);
-		printf("                                                                      ");
+		printf("                                                                                ");
 		MoveCursor(32, 3);
 		printf("%s", NewItem->Description.c_str());
 
@@ -1178,27 +1178,65 @@ void UpdateWallet(Player* Player)
 	}
 }
 
+const char* GetPurchaseSentence() {
+
+	const char* List[10] = {
+		"물건은 %s님이 가져갑니다!",
+		"낙찰자는 %s님!",
+		"오늘의 승자는 %s!",
+		"물건의 주인공은 %s님!",
+		"%s님, 대금은 저에게 주고 가시면 됩니다~",
+		"치열한 경쟁이었습니다!!",
+		"구매해주셔서 감사합니다.",
+	};
+
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> dis(0, 7);
+	int Index = dis(gen);
+
+	return List[Index];
+}
+
+const char* GetFailSentece() {
+	const char* List[8] = {
+		"네! 포기자는 저~~~~ 짝으로 빠져주시기 바랍니다!",
+		"정말 아쉽군요!",
+		"저런....",
+		"돈이 없다니 정말 안타까울 따름입니다!",
+		"엥 이걸?",
+		"이 물건을 포기하시다니...!",
+		"나가는 길은 저 쪽입니다.",
+		"안녕히 가세요.^^77"
+	};
+
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> dis(0, 7);
+	int Index = dis(gen);
+
+	return List[Index];
+}
+
 void PurchaseSequence(const Item* PurchasedItem)
 {
 	auto& Auction = AuctionSystem::GetInstance();
 
 	ClearLogSection();
 	MoveCursor(34, 3);
-	printf("오늘 물건의 낙찰자는 %s 님!!", Auction.CurrentPlayer->GetName().c_str());
+	printf(GetPurchaseSentence(), Auction.CurrentPlayer->GetName().c_str());
 	while (_kbhit()) _getch();
 	_getch();
 	MoveCursor(35, 3);
 	if (PurchasedItem) {
 		string Money = MoneyFormat(PurchasedItem->CallValue);
-		printf("%s 원에 낙찰되셨습니다!", Money.c_str());
+		printf("낙찰가 : %s 원", Money.c_str());
 	}
 	else {
 		printf("낙찰 정보를 불러오지 못했습니다!");
 	}
-	while (_kbhit()) _getch();
-	_getch();
 	MoveCursor(36, 3);
-	printf("다음에 또 만나요.");
+	printf("아무 키나 눌러 넘어가기.");
 	while (_kbhit()) _getch();
 	_getch();
 
@@ -1208,7 +1246,7 @@ void GiveupSequence()
 {
 	ClearLogSection();
 	MoveCursor(34, 3);
-	printf("네! 포기자는 저~~~~ 짝으로 빠져주시기 바랍니다!");
+	printf(GetFailSentece());
 	while (_kbhit()) _getch();
 	_getch();
 	ClearLogSection();
