@@ -551,7 +551,7 @@ void DrawAuctionScreen()
 
 			//NPC가 모두 포기했으면 플레이어가 산다.
 			if (Auction.CheckAllNPCGiveup()) {
-				const bool IsCalculateDay = (Auction.Day == 7);
+				const bool IsCalculateDay = (Auction.Day%7==0);
 				Item* PurchasedItem = Auction.AuctionItem;
 				const bool Purchased = (PurchasedItem != nullptr) && Auction.CurrentPlayer->PurchaseItem(PurchasedItem);
 				if (Purchased) {
@@ -591,8 +591,8 @@ void DrawAuctionScreen()
 					ClearLogSection();
 					MoveCursor(34, 3);
 					printf("\033[1;31m경매에 참여할 자금이 부족하네요.\033[0m");
-					MoveCursor(35, 3);
-					printf("Enter를 누르면 다음날로 넘어갑니다.");
+					MoveCursor(34, 3);
+					printf("\033[1;34mEnter를 누르면 다음날로 넘어갑니다.\033[0m");
 
 					int Key = 0;
 					while (Key != KEY_ENTER) {
@@ -606,8 +606,8 @@ void DrawAuctionScreen()
 							ClearLogSection();
 							MoveCursor(34, 3);
 							printf("\033[1;31m경매에 참여할 자금이 부족하네요.\033[0m");
-							MoveCursor(35, 3);
-							printf("Enter를 누르면 다음날로 넘어갑니다.");
+							MoveCursor(34, 3);
+							printf("\033[1;34mEnter를 누르면 다음날로 넘어갑니다.\033[0m");
 							Key = 0;
 							continue;
 						}
