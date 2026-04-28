@@ -43,9 +43,9 @@ int main()
 	SetConsoleTitle(L"레전드 경매 게임");
 	//EnableConsoleUtf8AndVT();
 	// 1. 콘솔 출력 인코딩을 UTF-8로 설정
-	SetConsoleOutputCP(65001);
+	//SetConsoleOutputCP(65001);
 	// 2. 콘솔 입력 인코딩도 UTF-8로 설정
-	SetConsoleCP(65001);
+	//SetConsoleCP(65001);
 	system("mode con:cols=120 lines=45");
 	FixConsoleSize();
 	

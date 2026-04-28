@@ -436,7 +436,10 @@ void DrawPrologue()
 
 	TypeWrite(55, 20, "당신의 이름은? : ");
 	string NewName;
-	std::cin >> NewName;
+	while (NewName.empty()) {
+		MoveCursor(20, 68);
+		getline(cin, NewName);
+	}
 
 	Auction.CurrentPlayer->SetName(NewName);
 
